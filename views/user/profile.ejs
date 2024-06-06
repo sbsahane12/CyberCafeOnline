@@ -1,0 +1,404 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  /* Custom CSS */
+  .bg-zinc-100 {
+    background-color: #f0f4f8;
+  }
+
+  .dark .bg-zinc-800 {
+    background-color: #1a202c;
+  }
+
+  .max-w-4xl {
+    max-width: 64rem;
+  }
+
+  .p-5 {
+    padding: 1.25rem;
+  }
+
+  .bg-white {
+    background-color: #ffffff;
+  }
+
+  .dark .bg-zinc-700 {
+    background-color: #2d3748;
+  }
+
+  .shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .p-6 {
+    padding: 1.5rem;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .space-x-6 {
+    margin-right: 1.5rem;
+  }
+
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .h-24 {
+    height: 6rem;
+  }
+
+  .w-24 {
+    width: 6rem;
+  }
+
+  .rounded-full {
+    border-radius: 9999px;
+  }
+
+  .object-cover {
+    object-fit: cover;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .text-zinc-900 {
+    color: #1a202c;
+  }
+
+  .dark .text-white {
+    color: #ffffff;
+  }
+
+  .space-x-2 {
+    margin-right: 0.5rem;
+  }
+
+  .mt-1 {
+    margin-top: 0.25rem;
+  }
+
+  .text-blue-600 {
+    color: #3182ce;
+  }
+
+  .dark .text-blue-400 {
+    color: #90cdf4;
+  }
+
+  .hover\:underline:hover {
+    text-decoration: underline;
+  }
+
+  form {
+    display: block;
+  }
+
+  .grid {
+    display: grid;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gap-6 {
+    gap: 1.5rem;
+  }
+
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .max-w-lg {
+    max-width: 32rem;
+  }
+
+  /* Styles for the heading */
+  .text-lg {
+    font-size: 1.125rem;
+  }
+
+  .font-semibold {
+    font-weight: 800;
+  }
+
+  /* Styles for the input fields */
+  input[type="text"],
+  input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.3rem;
+    border: 2px solid #f37a05;
+    border-radius: 0.375rem;
+  }
+
+  .width-full {
+    width: 100%;
+  }
+
+  /* Styles for specific buttons */
+
+
+  .service-section {
+    margin-top: 3rem;
+  }
+
+  .service-section h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a202c;
+    margin-bottom: 1rem;
+  }
+
+  .service-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  .service-table th,
+  .service-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .service-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+
+  .service-table a {
+    color: #3182ce;
+    text-decoration: none;
+  }
+
+  .service-table a:hover {
+    text-decoration: underline;
+  }
+
+  .service-table p {
+    margin-top: 0.5rem;
+  }
+
+  .service-table th:nth-child(1),
+  .service-table td:nth-child(1) {
+    width: 30%;
+  }
+
+  .service-table th:nth-child(2),
+  .service-table td:nth-child(2) {
+    width: 25%;
+  }
+
+  .service-table th:nth-child(3),
+  .service-table td:nth-child(3) {
+    width: 20%;
+  }
+
+  .service-table th:nth-child(4),
+  .service-table td:nth-child(4) {
+    width: 25%;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .avatar-div {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Media Query for Tablets */
+  @media (max-width: 768px) {
+    .service-table {
+      overflow-x: auto;
+    }
+  }
+
+  /* Media Query for Mobile Devices */
+  @media (max-width: 480px) {
+    .grid-cols-2 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .h-24 {
+      height: 4rem;
+    }
+
+    .w-24 {
+      width: 4rem;
+    }
+
+    .text-2xl {
+      font-size: 1.25rem;
+    }
+
+    .space-x-6 {
+      margin-right: 1rem;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+    }
+
+    .service-table {
+      font-size: 0.8rem;
+    }
+
+    .service-table th,
+    .service-table td {
+      padding: 0.4rem;
+    }
+
+    .service-table th:nth-child(1),
+    .service-table td:nth-child(1) {
+      width: 40%;
+    }
+
+    .service-table th:nth-child(2),
+    .service-table td:nth-child(2) {
+      width: 30%;
+    }
+
+    .service-table th:nth-child(3),
+    .service-table td:nth-child(3) {
+      width: 20%;
+    }
+
+    .service-table th:nth-child(4),
+    .service-tabletd:nth-child(4) {
+width: 10%;
+}
+}
+/* Media Query for Small Mobile Devices */
+@media (max-width: 360px) {
+.service-table {
+font-size: 0.7rem;
+}
+.service-table th,
+.service-table td {
+  padding: 0.2rem;
+}
+
+.btn {
+  padding: 0.1rem 0.3rem;
+  font-size: 0.7rem;
+}
+}
+</style>
+<body class="bg-zinc-100 dark:bg-zinc-800">
+  <div class="max-w-4xl mx-auto p-5 width-full">
+    <div class="bg-white dark:bg-zinc-700 shadow rounded-lg p-6">
+      <h1 class="text-lg font-semibold">User Profile</h1>
+      <% if (user && user.avatar) { %>
+        <div class="avatar-div">
+          <img class="avatar" src="<%= user.avatar %>" alt="User profile picture" />
+        </div>
+      <% } %>
+      <% if (user && user.username) { %>
+        <p class="avatar-div">User Name: <%= user.username %></p>
+      <% } %>
+      <form action="/user/profile/<%= user && user._id ? user._id : '' %>?_method=PUT" method="post" enctype="multipart/form-data">
+        <div class="grid grid-cols-2 gap-6 mb-6">
+          <div>
+            <label class="form-label block mb-2 text-sm font-medium">Username</label>
+            <input type="text" name="username" value="<%= user && user.username ? user.username : '' %>" class="form-control max-w-lg" readonly />
+          </div>
+          <div>
+            <label class="form-label block mb-2 text-sm font-medium">Email</label>
+            <input type="text" name="email" value="<%= user && user.email ? user.email : '' %>" class="form-control max-w-lg" disabled />
+          </div>
+          <div>
+            <label class="form-label block mb-2 text-sm font-medium">Role</label>
+            <input type="text" name="role" value="<%= user && user.role ? user.role : '' %>" class="form-control max-w-lg" disabled />
+          </div>
+          <div>
+            <label class="form-label block mb-2 text-sm font-medium">Is Verified</label>
+            <input type="text" name="is_verified" value="<%= user && user.is_verified ? user.is_verified : '' %>" class="form-control max-w-lg" disabled />
+          </div>
+          <div>
+            <label class="form-label block mb-2 text-sm font-medium">Mobile</label>
+            <input type="text" name="mobile" value="<%= user && user.mobile ? user.mobile : '' %>" class="form-control max-w-lg" />
+          </div>
+          <div>
+            <label class="form-label block mb-2 text-sm font-medium">Avatar</label>
+            <input type="file" name="avatar" class="form-control max-w-lg" />
+          </div>
+        </div>
+        <button class="btn mt-3">Save Changes</button>
+      </form>
+   
+  
+      <h4>Service Applications</h4>
+      <% if (applications && applications.length > 0) { %>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover service-table">
+            <thead class="table-dark">
+              <tr >
+                <th style="color: #f37a05;">Service Title</th>
+                <th style="color: #f37a05;">Email</th>
+                <th style="color: #f37a05;">Mobile</th>
+                <th style="color: #f37a05;">Update</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% applications.forEach(application => { %>
+                <tr>
+                  <td><%= application.serviceId && application.serviceId.title ? application.serviceId.title : '' %></td>
+                  <td><%= application.mail ? application.mail : '' %></td>
+                  <td><%= application.contact ? application.contact : '' %></td>
+                  <td>
+                    <a href="/user/application/<%= application._id %>" class="btn ">Update</a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <p>No service applications found.</p>
+      <% } %>
+    </div>
+  </div>
+</div>
+</div>
+</body>

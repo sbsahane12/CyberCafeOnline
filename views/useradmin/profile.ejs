@@ -1,0 +1,413 @@
+<% layout("/layouts/adminboilerplate") %>
+<style>
+  /* Custom CSS */
+  .bg-zinc-100 {
+    background-color: #f0f4f8;
+  }
+
+  .dark:bg-zinc-800 {
+    background-color: #1a202c;
+  }
+
+  .max-w-4xl {
+    max-width: 64rem;
+  }
+
+  .p-5 {
+    padding: 1.25rem;
+  }
+
+  .bg-white {
+    background-color: #ffffff;
+  }
+
+  .dark:bg-zinc-700 {
+    background-color: #2d3748;
+  }
+
+  .shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .p-6 {
+    padding: 1.5rem;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .space-x-6 {
+    margin-right: 1.5rem;
+  }
+
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .h-24 {
+    height: 6rem;
+  }
+
+  .w-24 {
+    width: 6rem;
+  }
+
+  .rounded-full {
+    border-radius: 9999px;
+  }
+
+  .object-cover {
+    object-fit: cover;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .text-zinc-900 {
+    color: #1a202c;
+  }
+
+  .dark:text-white {
+    color: #ffffff;
+  }
+
+  .space-x-2 {
+    margin-right: 0.5rem;
+  }
+
+  .mt-1 {
+    margin-top: 0.25rem;
+  }
+
+  .text-blue-600 {
+    color: #3182ce;
+  }
+
+  .dark:text-blue-400 {
+    color: #90cdf4;
+  }
+
+  .hover\:underline:hover {
+    text-decoration: underline;
+  }
+
+  form {
+    display: block;
+  }
+
+  .grid {
+    display: grid;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gap-6 {
+    gap: 1.5rem;
+  }
+
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .max-w-lg {
+    max-width: 32rem;
+  }
+
+  /* Styles for the heading */
+  .text-lg {
+    font-size: 1.125rem;
+  }
+
+  .font-semibold {
+    font-weight: 800;
+  }
+
+  /* Styles for the input fields */
+  input[type="text"],
+  input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.3rem;
+    margin: 8px;
+    border: 2px solid #f37a05;
+    border-radius: 0.375rem;
+  }
+
+  .width-full {
+    width: 100%;
+  }
+
+  /* Styles for specific buttons */
+  .bg-zinc-300 {
+    background-color: #f2f5f7;
+  }
+
+  .bg-zinc-400 {
+    background-color: #dce5ec;
+  }
+
+  .bg-red-500 {
+    background-color: #e53e3e;
+  }
+
+  .bg-red-600 {
+    background-color: #c53030;
+  }
+
+  .bg-orange-500 {
+    background-color: #f37a05;
+  }
+
+  .bg-orange-600 {
+    background-color: #ed6707;
+  }
+
+  .text-black {
+    color: #000;
+  }
+
+  .text-white {
+    color: #fff;
+  }
+
+  .btn {
+    color: #f37a05;
+    font-weight: 400;
+    border-radius: 0.375rem;
+    margin-top: 5px;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .btn:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    color: #a64500;
+    font-weight: 800;
+    border-radius: 0.375rem;
+    transform: scale(1.1);
+  }
+
+  .service-section {
+    margin-top: 3rem;
+  }
+
+  .service-section h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a202c;
+    margin-bottom: 1rem;
+  }
+
+  .service-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .service-table th,
+  .service-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .service-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+
+  .service-table a {
+    color: #3182ce;
+    text-decoration: none;
+  }
+
+  .service-table a:hover {
+    text-decoration: underline;
+  }
+
+  .service-table p {
+    margin-top: 0.5rem;
+  }
+
+  .avatar{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+   
+  }
+
+  .avatar-div{
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Hover styles for buttons */
+</style>
+<body class="bg-zinc-100 dark:bg-zinc-800">
+    
+  <div class="max-w-4xl mx-auto p-5 width-full">
+   
+    <div class="bg-white dark:bg-zinc-700 shadow rounded-lg p-6">
+        <h1 class="text-lg font-semibold">User Profile</h1>
+
+      <div class="avatar-div">
+       
+        <img
+          class="avatar"
+          src="<%= user.avatar %>"
+          alt="User profile picture"
+        />
+       
+      </div>
+      <p class="avatar-div">User Name: <%= user.username %></p>
+      <form action="/admin/profile/<%= user._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+        <div class="grid grid-cols-2 gap-6 mb-6">
+       
+            <div>
+                <label
+                  class="block mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-300"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  name="username"
+                  value="<%= user.username %>"
+                  class="form-control border-orange-500 rounded"
+                  required
+                  readonly
+                />
+              </div>    
+
+              <div>
+                <label
+                  class="block mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-300"
+                  >Email</label
+                >
+                <input
+                  type="text"
+                  name="email"
+                  value="<%= user.email %>"
+                  class="form-control border-orange-500 rounded"
+                  required
+                />
+              </div> 
+       
+              <div>
+                <label
+                  class="block mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-300"
+                  >Role</label
+                >
+                <input
+                  type="text"
+                  name="role"
+                  value="<%= user.role %>"
+                  class="form-control border-orange-500 rounded"
+                  required
+                />
+              </div> 
+              <div>
+                <label
+                  class="block mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-300"
+                  >Is Verified</label
+                >
+                <input
+                  type="text"
+                  name="is_verified"
+                  value="<%= user.is_verified %>"
+                  class="form-control border-orange-500 rounded"
+                  required
+                  disabled
+                />
+              </div> 
+
+              <div>
+                <label
+                  class="block mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-300"
+                  >Mobile</label
+                >
+                <input
+                  type="text"
+                  name="mobile"
+                  value="<%= user.mobile %>"
+                  class="form-control border-orange-500 rounded"
+                  required
+                  readonly
+                />
+              </div> 
+
+              <div>
+                <label
+                  class="block mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-300"
+                  >Avatar</label
+                >
+                <input type="file" name="avatar"  class="form-control border-orange-500 rounded" >
+              </div> 
+              
+        </div>
+        <button class="btn">Save Changes</button>
+      </form>
+
+      <div class="service-section">
+        <h4>Service Applications</h4>
+        <% if (applications.length > 0) { %>
+        <table class="service-table">
+          <thead>
+            <tr>
+              <th>Service Title</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Update</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <% applications.forEach(application => { %>
+            <tr>
+              <td><%= application.serviceId.title %></td>
+              <td><%= application.mail %></td>
+              <td><%= application.contact %></td>
+                <td>
+                <a href="/user/application/<%= application._id %>">Update</a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% } else { %>
+        <p>No service applications found.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</body>

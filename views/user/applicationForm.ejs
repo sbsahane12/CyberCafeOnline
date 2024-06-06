@@ -1,0 +1,143 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    /* Styles for the container */
+.max-w-lg {
+    max-width: 32rem; /* Adjust the max-width as needed */
+}
+
+/* Styles for the heading */
+.text-lg {
+    font-size: 1.125rem; /* Adjust the font size as needed */
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+/* Styles for the input fields */
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 2px solid #f37a05; /* Adjust the border color as needed */
+    border-radius: 0.375rem; /* Adjust the border radius as needed */
+}
+
+.width-full{
+    width: 600px;
+}
+
+.btn:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    color: #a64500;
+}
+/* Styles for specific buttons */
+.bg-zinc-300 {
+    background-color: #f2f5f7; /* Adjust the background color as needed */
+}
+
+.bg-zinc-400 {
+    background-color: #dce5ec; /* Adjust the background color as needed */
+}
+
+.bg-red-500 {
+    background-color: #e53e3e; /* Adjust the background color as needed */
+}
+
+.bg-red-600 {
+    background-color: #c53030; /* Adjust the background color as needed */
+}
+
+.bg-orange-500 {
+    background-color: #f37a05; /* Adjust the background color as needed */
+}
+
+.bg-orange-600 {
+    background-color: #ed6707; /* Adjust the background color as needed */
+}
+
+.text-black {
+    color: #000; /* Adjust the text color as needed */
+}
+
+.text-white {
+    color: #fff; /* Adjust the text color as needed */
+}
+
+/* Hover styles for buttons */
+button:hover {
+    opacity: 0.8; /* Adjust the opacity as needed */
+}
+
+.update {
+    margin-left: -2px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.input-group {
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+</style>
+<body>
+    <form class="mb-4 mx-auto width-full needs-validation" action="/user/application/<%=application._id%>?_method=PUT" method="POST" enctype="multipart/form-data" novalidate>
+        <div class="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg mt-4 mb-4">
+            <div class="mb-4">
+                <h2 class="text-lg font-semibold">Edit  Application</h2>
+            </div>
+            <div class="grid grid-cols-1 gap-4">
+                <input type="text" name="applicant_name" value="<%=application.fname%> <%=application.mname%> <%=application.lname%>" class="form-control border-orange-500 rounded" required disabled>
+                <input type="text" name="description" value="<%=application.mail%>" class="form-control rounded" required disabled>
+                <input type="text" name="price" value="<%=application.contact%>" class="form-control border-orange-500 rounded" required>
+                <input type="text" name="image" value="<%=application.whcontact%>" class="form-control border-orange-500 rounded" required>
+            </div>
+            <div class="mt-4" id="documentsContainer">
+                <h3 class="text-lg font-semibold update">Upload Documents</h3>
+                <% for(let i = 0; i < application.documents.length; i++) { %>
+                    <div class="input-group">
+                        <input type="text" name="documents" value="<%=application.documents[i]%>" class="form-control border-orange-500 rounded" required hidden >
+                        <input type="file" name="new_documents" class="form-control border-orange-500 rounded ">
+                        <button type="button" class="btn border-orange-500 delete-skill"><i class="fas fa-trash"></i></button>
+                    </div>
+                <% } %>
+            </div>
+
+           <button class="btn"><a href="/user/profile/<%=user._id%>">.</a>Back</button> 
+            <button class="btn">Save Changes</button>
+        </div>
+    </form>
+    <script>
+
+        document.querySelectorAll('.delete-skill').forEach(function(button) {
+            button.addEventListener('click', function() {
+                this.closest('.input-group').remove();
+            });
+        });
+
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>

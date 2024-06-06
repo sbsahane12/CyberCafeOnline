@@ -1,0 +1,185 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    /* Hero Section */
+   
+
+    .hero-section ul {
+        list-style: none;
+        padding: 0;
+        font-size: 1.2em;
+    }
+
+    .hero-section li {
+        margin-bottom: 10px;
+        counter-increment: list-item;
+        position: relative;
+        padding-left: 30px;
+    }
+
+    .hero-section li::before {
+        content: counter(list-item) ".";
+        position: absolute;
+        left: 0;
+        color: #f37a05;
+        font-weight: bold;
+    }
+
+    /* About Us Section */
+    
+
+ 
+
+  
+
+
+    .service img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+        border-radius: 50%;
+    }
+    .service {
+        text-align: center;
+        
+    }
+
+   
+
+    /* Contact Section */
+    .contact-section {
+        background-color: #f37a05;
+        color: white;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .contact-section h2,
+    .contact-section p {
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: white;
+        color: #f37a05;
+        border: 1px solid #f37a05;
+    }
+
+    .btn-secondary:hover {
+        background-color: #f37a05;
+        color: white;
+    }
+
+    /* Highlighted Keywords */
+    .highlight {
+        color: #f37a05;
+        font-weight: bold;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 2em;
+        }
+
+        .hero-section ul {
+            font-size: 1em;
+        }
+
+        .service {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-section h1 {
+            font-size: 1.5em;
+        }
+    }
+</style>
+
+<body>
+    <!-- Marquee Tag for Welcome Message -->
+    <marquee behavior="scroll" direction="left" scrollamount="8">
+        <h1 style="color: #f37a05; font-weight: bold; font-size: 3em;">Welcome to CyberCafe! </h1>
+    </marquee>
+
+    <!-- About Us Section -->
+    <div class="about-section" >
+     <h1 style="color: #f37a05; font-weight: bold; font-size: 3em;margin-top: 20px;">CyberCafe Features <a href="/services" class="btn btn-secondary btn-lg mb-3 mt-3 md-3" >Explore Our Services</a></h1>
+        <hr>
+        <ul class="hero-section">
+            <li>Your one-stop solution for all your <span class="highlight">document needs</span>, providing <span class="highlight">20+ online document services</span> across India.</li>
+            <li>Please explore our services to get started.</li>
+            <li><span class="highlight">India's first online document service platform</span></li>
+          
+            <li>Our mission is to provide <span class="highlight">fast, reliable, and secure document services</span> to individuals and businesses all over India.</li>
+            <li>At Document CyberCafe, we're not just a company; we're a community of individuals and businesses who share our passion for <span class="highlight">document management</span>.</li>
+            <li>Our team of experts is dedicated to delivering exceptional <span class="highlight">document services</span> to our clients.</li>
+            <li>We believe that everyone has the right to access <span class="highlight">important documents</span>, and we are committed to making that a reality.</li>
+            <li>We strive to create a <span class="highlight">community of like-minded individuals</span> who share our values and love for document management.</li>
+            <li>Thank you for choosing Document CyberCafe as your trusted partner in <span class="highlight">document management</span>.</li>
+        </ul>
+
+        
+
+        <h1 style="color: #f37a05; font-weight: bold; font-size: 3em" class="text-center">About Us</h1>
+        <hr>
+        <p>We offer a wide range of online document services to help you manage your paperwork effortlessly. From birth certificates to property documents, we have got you covered. Our mission is to provide <span class="highlight">fast, reliable, and secure document services</span> to individuals and businesses all over India.</p>
+        <p>At Document CyberCafe, our journey began with a simple yet powerful vision: to revolutionize the way individuals and businesses access essential document services. Founded in 2024, we embarked on a mission to streamline the cumbersome process of obtaining vital documents, empowering our clients to navigate bureaucratic hurdles with ease.</p>
+        <p>Since our inception, we have remained steadfast in our commitment to excellence. We pride ourselves on delivering unparalleled customer service, ensuring every interaction with our platform is seamless and satisfactory.</p>
+
+        <h1 style="color: #f37a05; font-weight: bold; font-size: 3em" class="text-center">Our Services</h1>
+       
+        <hr>
+        <div class="row">
+            <div class="col-md-4 service">
+                <img src="https://img.freepik.com/free-psd/birth-announcement-landing-page-template_23-2151233503.jpg?t=st=1716738729~exp=1716742329~hmac=ddefcf0fea05069fda4e13840ee1d362b99fe0dd39e7b96f736adb3489d65b8c&w=1380" alt="Service Icon">
+                <h4>Birth Certificates</h4>
+                <p>Request your birth certificate easily and quickly with our online service.</p>
+            </div>
+            <div class="col-md-4 service">
+                <img src="https://img.freepik.com/free-vector/plain-credit-card-concept-illustration_114360-117.jpg?1&w=740&t=st=1716738357~exp=1716738957~hmac=cf0bc3ad4041b937089c474f4607b86ad22f07872af33b4b528c84721bcedc31" alt="Service Icon">
+                <h4>Pan Card Documents</h4>
+                <p>Get your Pan card documents sorted without any hassle.</p>
+            </div>
+            <div class="col-md-4 service">
+                <img src="https://img.freepik.com/premium-vector/invitation-card-wedding_822782-254.jpg?w=360" alt="Service Icon">
+                <h4>Marriage Certificates</h4>
+                <p>Apply for your marriage certificate online with our user-friendly service.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 service">
+                <img src="https://img.freepik.com/free-photo/travel-again-concept-assortment_23-2149064617.jpg?t=st=1716738665~exp=1716742265~hmac=5f38da5d40933115ff1e4ecc6ec458333fa126f7ff3a7ae5da2b0de787eda3bc&w=360" alt="Service Icon">
+                <h4>Passport Services</h4>
+                <p>Get assistance with passport applications and renewals.</p>
+            </div>
+            <div class="col-md-4 service">
+                <img src="https://img.freepik.com/free-vector/hand-drawn-driving-license-template_23-2150020441.jpg?w=740&t=st=1716738592~exp=1716739192~hmac=3a68f62a5e69a92c81ad97521148d20e7000a2358a67ecfd1cc80af4dfd4350b" alt="Service Icon">
+                <h4>Driving License</h4>
+                <p>Apply for a new driving license or renew your existing one.</p>
+            </div>
+            <div class="col-md-4 service">
+                <img src="https://img.freepik.com/free-vector/flat-certificate-template_52683-61539.jpg?w=1060&t=st=1716738437~exp=1716739037~hmac=c70ac520578735fe7c00a30a4242263ebd5636bdb2b3fcc7afc8ab4cb4d0a3ae" alt="Service Icon">
+                <h4>Educational Certificates</h4>
+                <p>Obtain your educational certificates from the comfort of your home.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to highlight important keywords
+        document.addEventListener("DOMContentLoaded", function() {
+            const keywords = ["document needs", "20+ online document services", "India's first online document service platform", "comprehensive document services", "fast, reliable, and secure document services"];
+            const textElements = document.querySelectorAll("p, li");
+
+            textElements.forEach(element => {
+                keywords.forEach(keyword => {
+                    if (element.textContent.includes(keyword)) {
+                        element.innerHTML = element.innerHTML.replace(new RegExp(keyword, 'g'), `<span class="highlight">${keyword}</span>`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>

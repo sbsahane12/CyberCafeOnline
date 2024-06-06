@@ -1,0 +1,63 @@
+<% layout("/layouts/adminboilerplate") %>
+
+    <style>
+        .card {
+            margin-top: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #ccc;
+            width: 1400px;
+        }
+    </style>
+
+
+    <body>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="serviceTable" class="table table-striped table-hover">
+                        <thead>
+                    
+                            <tr>
+
+
+
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% services.forEach(service=> { %>
+                                <tr>
+
+                                    <td><img src="<%= service.image %>" alt="<%= service.name %>" class="rounded-circle"
+                                            style="width: 40px; height: 40px;"></td>
+                                    <td>
+                                        <%= service.title %>
+                                    </td>
+                                    <td>Active</td>
+                                    <td>
+                                        <a href="/admin/services/<%= service._id %>/edit"
+                                            class="btn btn-sm btn-primary mr-2">Edit</a>
+                                        <form action="/admin/services/<%= service._id %>?_method=delete" method="post"
+                                            style="display: inline;">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+    </div>

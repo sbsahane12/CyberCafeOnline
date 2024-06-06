@@ -1,0 +1,40 @@
+<% layout("/layouts/boilerplate") %>
+  <style>
+    .container-alert {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      margin-left: 30%;
+      /* Adjust the left margin for smaller screens */
+      margin-right: 10%;
+      /* Adjust the right margin for smaller screens */
+    }
+
+    /* Media query for smaller screens */
+    @media screen and (max-width: 768px) {
+      .container-alert {
+        margin-left: 5%;
+        /* Adjust the left margin for smaller screens */
+        margin-right: 5%;
+        /* Adjust the right margin for smaller screens */
+      }
+    }
+  </style>
+
+  <body>
+    <div class="container-alert mt-5">
+      <div class="alert alert-danger d-flex align-items-center mt-4 mb-4" role="alert">
+        <div>
+          <b>Error :</b>
+          <%= err.message %>
+          <br />
+          <a href="/" style="color: blue;">Go Home</a>
+          <% if (user) { %>
+            <a href="/user/login" style="color: blue;">Login Again</a>
+          <% } %>
+          
+        </div>
+        </div>
+      </div>
+    </div>
+  </body>

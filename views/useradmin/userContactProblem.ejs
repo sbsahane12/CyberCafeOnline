@@ -1,0 +1,40 @@
+<% layout("/layouts/adminboilerplate") %>
+
+<style>
+    /* Add your custom styles here */
+    .problem-card {
+        margin-top: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #ccc;
+    }
+
+    .problem-card img {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 10px;
+    }
+
+    .problem-card p {
+        margin-bottom: 10px;
+    }
+
+    
+</style>
+
+<body>
+    <div class="container">
+            <div class="problem-card">
+                <img src="<%= contact.image %>" alt="Problem Image">
+                <p><strong>Name:</strong> <%= contact.name %></p>
+                <p><strong>Email:</strong> <%= contact.email %></p>
+                <p><strong>Contact Number:</strong> <%= contact.contact %></p>
+                <p><strong>Message:</strong> <%= contact.message %></p>
+            </div>
+   
+    </div>
+</body>

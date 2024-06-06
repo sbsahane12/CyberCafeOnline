@@ -1,0 +1,77 @@
+
+
+            <% layout("/layouts/adminboilerplate") %>
+    <style>
+        .card {
+            margin-top: 20px;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #ccc;
+            width: 1400px;
+        }
+    </style>
+    <div class="card">
+
+
+
+
+
+        <div class="card-body">
+            <a href="/admin/users" class="btn btn-primary ">Back </a>
+            <div class="table-responsive">
+                <table id="serviceTable" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Documents</th>
+                            <th>Download</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% applications.forEach(application=> { %>
+                            <tr>
+                                <td>
+                                    <%= application.serviceId.title %>
+                                </td>
+
+                                <td>
+                                    <% application.serviceId.documents.forEach(element=> { %>
+                                        <li>
+                                            <%= element %>
+                                        </li>
+                                        <% }) %>
+                                </td>
+                                <td>
+                                    <% application.documents.forEach(document=> { %>
+                                        <li> <a href="<%= document %>" class="link" download>Download</a></li>
+                                        <% }) %>
+                                </td>
+
+                                <td>
+                                    <form action="/admin/users/application/<%= application._id %>?_method=delete"
+                                        method="post">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+
+                                <td>
+                                    <form action="/admin/users/application/<%= user._id %>/sendEmail" method="post">
+                                        <button type="submit" class="btn btn-primary">Send Mail</button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </div>

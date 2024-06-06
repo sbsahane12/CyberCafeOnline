@@ -1,0 +1,115 @@
+<%layout("/layouts/boilerplate")%>
+<style>
+  /* Container Styles */
+  .max-w-4xl {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Grid Styles */
+  .grid {
+    display: grid;
+  }
+
+  .grid-cols-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .gap-8 {
+    gap: 2rem;
+  }
+
+  /* Image Styles */
+  .w-full {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Heading Styles */
+  .text-2xl {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  /* Paragraph Styles */
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  .text-zinc-600 {
+    color: #718096;
+  }
+
+  .dark-mode .text-zinc-600 {
+    color: #cbd5e0;
+  }
+
+  /* Button Styles */
+  .btn {
+    background-color: #c05621;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    width: auto;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #f39d56;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 30px;
+    transform: scale(1.05);
+  }
+ 
+
+  
+</style>
+<body class="bg-white dark:bg-zinc-800 ">
+  <div class="max-w-4xl mx-auto py-12 ">
+    <div class="grid md:grid-cols-2 gap-8 items-center singleservise">
+      <div>
+        <h1 class="text-2xl font-semibold text-zinc-900 dark:text-white mb-4" style="text-decoration: underline;"><%=service.title%></h1>
+        <img src="<%=service.image%>" alt="Red Headphones" class="image">
+      </div>
+      <div>
+        <h2 class="text-2xl font-semibold text-zinc-900 dark:text-white mt-5">Service Description</h2>
+        <p class="mt-2 text-zinc-600 dark:text-zinc-400">
+          <%=service.description%>
+        </p>
+        <h2 class="text-2xl font-semibold text-zinc-900 dark:text-white">Documents</h2>
+        <ol class="list-group list-group-numbered">
+          <% for( let i = 0; i < service.documents.length; i++ ) { %>
+            <div class="list-group-item mt-2">
+              <%=service.documents[i]%>
+            </div>
+          <% } %> 
+        </ol>
+        <div class="text-2xl font-bold text-zinc-900 dark:text-white"><%= new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(service.price) %></div>
+        <div>
+          <a href="/services/<%=service._id%>/apply" class="btn">Apply</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

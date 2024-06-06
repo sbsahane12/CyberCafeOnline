@@ -1,0 +1,133 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Custom styles */
+  footer {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    padding: 14px 0;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .logo img {
+    height: 45px;
+  }
+
+  .resources,
+  .follow-us,
+  .legal {
+    flex: 1;
+    margin: 12px 0;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: #666;
+    transition: color 0.3s;
+  }
+
+  a:hover {
+    color: #333;
+  }
+
+ 
+</style>
+<header >
+  <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top justify-content-between">
+    <div class="container-fluid">
+      <a href="/services" class="navbar-brand">
+        <img
+          src="/images/cafe.png"
+          class="logo-img"
+          alt="Logo"
+        />
+      </a>
+  
+     
+      <form class="form-inline my-2 my-lg-0">
+      <input name="search" class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">
+   
+    </form>
+      
+       
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          
+          <a class="nav-link " href="/admin/services">All Services</a>
+          <a class="nav-link " href="/admin/users">All Users</a>
+          <a href="/admin/services/new" class="nav-link ">Add Services </a>
+          <a class="nav-link " href="/admin/users/adduser">Add User</a>
+          <a class="nav-link " href="/admin/contact">All Issues</a>
+        </div>
+        <div class="ms-auto navbar-nav">
+          <% if (user) { %>
+            <a class="nav-link" href="/admin/profile/<%= user._id %>"><i class="fas fa-user"></i> Profile</a>
+            <a class="nav-link" href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          <% } else { %>
+            <!-- <a class="nav-link" href="/admin/login"><i class="fas fa-sign-in-alt"></i>Admin Login</a> -->
+            <select name="login" id="loginSelect" class="form-select custom-select nav-link">
+              <option value="/admin/login">Login</option>
+              <option value="/admin/login">Admin</option>
+              <option value="/user/login">User</option>
+            </select>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+        const loginSelect = document.getElementById("loginSelect");
+        loginSelect.addEventListener("change", function () {
+          const selectedValue = loginSelect.value;
+          if (selectedValue) {
+            window.location.href = selectedValue;
+          }
+        });
+      });
+  </script>
+</header>
+<style>
+  .custom-select {
+    width: 100px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    font-size: 14px;
+    color: #495057;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .custom-select:focus {
+    border-color: #f8f9fa;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+</style>
+
+
