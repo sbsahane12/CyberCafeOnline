@@ -1,9 +1,9 @@
+// adminController.js
 const Service = require("../models/service");
 const ExpressError = require("../utils/ExpressError");
 const cloudinary = require("../utils/cloudinary");
 const ServiceApply = require("../models/applyservice");
 const User = require("../models/user");
-const fs = require("fs").promises;
 
 exports.getProfile = async (req, res, next) => {
   try {
@@ -19,7 +19,6 @@ exports.getProfile = async (req, res, next) => {
   }
 };
 
-
 exports.updateProfileForm = async (req, res) => {
   try {
       const { username, mobile } = req.body;
@@ -30,18 +29,9 @@ exports.updateProfileForm = async (req, res) => {
           throw new ExpressError('User not found', 404);
       }
 
-      // if (!username || username.length < 7) {
-      //     throw new ExpressError('Username must be at least 7 characters long', 400);
-      // }
-
-      // if (!mobile || mobile.length !== 10) {
-      //     throw new ExpressError('Invalid mobile number', 400);
-      // }
-
       if (req.file) {
           const result = await cloudinary.uploader.upload(req.file.path);
           user.avatar = result.secure_url;
-          await fs.unlink(req.file.path);
       }
 
       user.username = username;
@@ -56,9 +46,6 @@ exports.updateProfileForm = async (req, res) => {
       res.redirect(`/admin/profile/${req.params.id}`);
   }
 };
-
-
-
 
 exports.getAllServices = async (req, res, next) => {
   try {
@@ -80,8 +67,6 @@ exports.createService = async (req, res, next) => {
     }
 
     const result = await cloudinary.uploader.upload(req.file.path);
-    await fs.unlink(req.file.path);
-
     const imageUrl = result.secure_url;
 
     const service = new Service({
@@ -93,7 +78,9 @@ exports.createService = async (req, res, next) => {
       documentCount: req.body.documents ? req.body.documents.length : 0,
     });
 
+
     await service.save();
+    req.flash("success", "Service created successfully");
     res.redirect("/admin/services");
   } catch (err) {
     next(new ExpressError("Failed to create service", 500));
@@ -107,6 +94,7 @@ exports.getSingleService = async (req, res, next) => {
       throw new ExpressError("Service not found", 404);
     }
     res.render("cybercafe/SingleService", { service });
+
   } catch (err) {
     next(new ExpressError("Failed to retrieve service", 500));
   }
@@ -138,14 +126,12 @@ exports.updateService = async (req, res, next) => {
     service.documentCount = req.body.documents ? req.body.documents.length : 0;
 
     if (req.file) {
-      await cloudinary.uploader.destroy(service.image);
       const result = await cloudinary.uploader.upload(req.file.path);
-      await fs.unlink(req.file.path);
-
       service.image = result.secure_url;
     }
 
     await service.save();
+    req.flash("success", "Service updated successfully");
     res.redirect("/admin/services");
   } catch (err) {
     next(new ExpressError("Failed to update service", 500));
@@ -168,6 +154,7 @@ exports.deleteService = async (req, res, next) => {
     // Delete the Service itself
     await Service.findByIdAndDelete(service._id);
 
+    req.flash("success", "Service deleted successfully");
     res.redirect("/admin/services");
   } catch (err) {
     next(new ExpressError("Failed to delete service", 500));

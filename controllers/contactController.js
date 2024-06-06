@@ -1,7 +1,7 @@
+// contactController.js
 const Contact = require("../models/contact");
 const cloudinary = require("../utils/cloudinary");
-const fs = require("fs").promises;
-const {contactSchemaValditation} = require("../validation/contactValidation");
+const { contactSchemaValditation } = require("../validation/contactValidation");
 
 exports.getContactForm = async (req, res) => {
   res.render("contact");
@@ -9,7 +9,7 @@ exports.getContactForm = async (req, res) => {
 
 exports.setContact = async (req, res) => {
   try {
-      const { user_id, name, email, contact, message } = req.body;
+    const { user_id, name, email, contact, message } = req.body;
 
     let result;
     const { error } = contactSchemaValditation.validate(req.body);
@@ -19,21 +19,21 @@ exports.setContact = async (req, res) => {
       return;
     }
 
-    if(req.file){
-         result = await cloudinary.uploader.upload(req.file.path);
-        await fs.unlink(req.file.path);
-        req.flash("success", "Screenshot uploaded successfully");
+    if (req.file) {
+      result = await cloudinary.uploader.upload(req.file.path);
     }
+
     const contactdata = new Contact({
       user_id,
       name,
       email,
       contact,
       message,
-      image: result.secure_url,
+      image: result ? result.secure_url : null,
     });
+
     await contactdata.save();
-   
+
     req.flash("success", "Message sent successfully");
     res.redirect("/contact");
   } catch (error) {

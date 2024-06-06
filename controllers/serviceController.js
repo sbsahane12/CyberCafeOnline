@@ -1,8 +1,10 @@
+// cybercafeController.js
 const Service = require("../models/service");
 const ServiceApply = require("../models/applyservice");
 const cloudinary = require("../utils/cloudinary");
-const fs = require("fs").promises;
 const ExpressError = require("../utils/ExpressError");
+
+
 
 exports.getAllServices = async (req, res, next) => {
   try {
@@ -43,22 +45,6 @@ exports.getApplyForm = async (req, res, next) => {
   }
 };
 
-const uploadWithRetry = async (filePath, retries = 3, delay = 1000) => {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const result = await cloudinary.uploader.upload(filePath);
-      await fs.unlink(filePath);
-      return result.secure_url;
-    } catch (error) {
-      if (i < retries - 1) {
-        await new Promise(resolve => setTimeout(resolve, delay));
-      } else {
-        throw new ExpressError("Failed to upload file to Cloudinary", 500);
-      }
-    }
-  }
-};
-
 exports.setApplyService = async (req, res, next) => {
   try {
     if (!req.user || !req.user._id) {
@@ -70,7 +56,7 @@ exports.setApplyService = async (req, res, next) => {
     const serviceId = req.params.id;
 
     const documents = req.files.map(file => file.path);
-    const uploadedDocuments = await Promise.all(documents.map(filePath => uploadWithRetry(filePath)));
+    const uploadedDocuments = await Promise.all(documents.map(filePath => cloudinary.uploader.upload(filePath).then(result => result.secure_url)));
 
     const newApplyService = new ServiceApply({
       serviceId,

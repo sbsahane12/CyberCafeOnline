@@ -1,7 +1,4 @@
-// helpers/mailer.js
-
 const nodemailer = require('nodemailer');
-
 
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -14,8 +11,17 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+const getBaseUrl = () => {
+    if (process.env.NODE_ENV === 'production') {
+        return process.env.VERCEL_URL;
+    } else {
+        const port = process.env.PORT || 8000; // Use port 8000 if not specified
+        return `http://localhost:${port}`;
+    }
+};
+
 const sendVerificationEmail = (email, token) => {
-    const url = `http://localhost:3000/user/verify-email?token=${token}`;
+    const url = `${getBaseUrl()}/user/verify-email?token=${token}`;
     const mailOptions = {
         from: process.env.SMTP_MAIL,
         to: email,
@@ -30,7 +36,7 @@ const sendVerificationEmail = (email, token) => {
 };
 
 const sendPasswordResetEmail = (email, token) => {
-    const url = `http://localhost:3000/user/resetPassword?token=${token}`;
+    const url = `${getBaseUrl()}/user/resetPassword?token=${token}`;
     const mailOptions = {
         from: process.env.SMTP_MAIL,
         to: email,
@@ -45,7 +51,7 @@ const sendPasswordResetEmail = (email, token) => {
 };
 
 const adminsendPasswordResetEmail = (email, token) => {
-    const url = `http://localhost:3000/admin/resetPassword?token=${token}`;
+    const url = `${getBaseUrl()}/admin/resetPassword?token=${token}`;
     const mailOptions = {
         from: process.env.SMTP_MAIL,
         to: email,
@@ -58,7 +64,6 @@ const adminsendPasswordResetEmail = (email, token) => {
         else console.log(`Email sent: ${info.response}`);
     });
 };
-
 
 const applicationRejectEmail = (email) => {
     const mailOptions = {
@@ -97,7 +102,7 @@ const problemSeenEmail = (email) => {
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
-        if (err) console.error(err);    
+        if (err) console.error(err);
         else console.log(`Email sent: ${info.response}`);
     });
 };

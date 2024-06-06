@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const cloudinary = require("../utils/cloudinary");
-const fs = require("fs").promises;
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { registerSchema, emailSchema, passwordResetSchema, loginSchema } = require('../validation/userValidation');
@@ -9,14 +8,16 @@ const UserForget = require('../models/userforget');
 const randomstring = require('randomstring');
 const ExpressError = require('../utils/ExpressError');
 const ServiceApply = require('../models/applyservice');
-const { Console } = require('console');
+const fs = require('fs');
 
 exports.signupForm = (req, res) => {
+    console.log("Debugging in signupForm controller...");
     res.render('user/signup');
 };
 
 exports.signup = async (req, res) => {
     try {
+        console.log("Debugging in signup controller...");
         let { username, email, password, role, mobile } = req.body;
         const { error } = registerSchema.validate(req.body);
 
@@ -30,8 +31,6 @@ exports.signup = async (req, res) => {
         }
 
         const result = await cloudinary.uploader.upload(req.file.path);
-        await fs.unlink(req.file.path);
-
         const registeredUser = await User.register(new User({
             username,
             email,
@@ -55,10 +54,12 @@ exports.signup = async (req, res) => {
 };
 
 exports.loginForm = (req, res) => {
+    console.log("Debugging in loginForm controller...");
     res.render('user/login');
 };
 
 exports.login = (req, res, next) => {
+    console.log("Debugging in login controller...");
     passport.authenticate('local', async (err, user, info) => {
         try {
             if (err) {
@@ -92,6 +93,7 @@ exports.login = (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
+    console.log("Debugging in logout controller...");
     req.logout((err) => {
         if (err) {
             return next(err);
@@ -102,6 +104,7 @@ exports.logout = (req, res, next) => {
 };
 
 exports.verifyEmail = async (req, res) => {
+    console.log("Debugging in verifyEmail controller...");
     try {
         const { token } = req.query;
         const userForget = await UserForget.findOne({ token });
@@ -125,10 +128,12 @@ exports.verifyEmail = async (req, res) => {
 };
 
 exports.forgetPasswordForm = (req, res) => {
+    console.log("Debugging in forgetPasswordForm controller...");
     res.render('user/forgetPassword');
 };
 
 exports.forgetPassword = async (req, res) => {
+    console.log("Debugging in forgetPassword controller...");
     try {
         const { error } = emailSchema.validate(req.body);
         if (error) {
@@ -157,6 +162,7 @@ exports.forgetPassword = async (req, res) => {
 };
 
 exports.resetPasswordForm = async (req, res) => {
+    console.log("Debugging in resetPasswordForm controller...");
     try {
         const { token } = req.query;
         const userForget = await UserForget.findOne({ token });
@@ -174,6 +180,7 @@ exports.resetPasswordForm = async (req, res) => {
 };
 
 exports.resetPassword = async (req, res) => {
+    console.log("Debugging in resetPassword controller...");
     try {
         const { token } = req.body;
         const { error } = passwordResetSchema.validate(req.body);
@@ -204,6 +211,7 @@ exports.resetPassword = async (req, res) => {
 };
 
 exports.profile = async (req, res) => {
+    console.log("Debugging in profile controller...");
     try {
         const id = req.user._id;
         if (!id) {
@@ -222,15 +230,14 @@ exports.profile = async (req, res) => {
         req.flash('error', err.message);
         res.redirect('/user/login');
     }
-}; 
+};
 
 exports.updateProfileForm = async (req, res) => {
+    console.log("Debugging in updateProfileForm controller...");
     try {
         const { username, mobile } = req.body;
         const userId = req.params.id;
 
-        console.log(req.file);
-        console.log(req.body);
         const user = await User.findById(userId);
         if (!user) {
             throw new ExpressError('User not found', 404);
@@ -245,8 +252,6 @@ exports.updateProfileForm = async (req, res) => {
         }
 
         if (req.file) {
-            console.log(req.file);
-            // await cloudinary.uploader.destroy(user.avatar);
             const result = await cloudinary.uploader.upload(req.file.path);
             user.avatar = result.secure_url;
             await fs.unlink(req.file.path);
@@ -266,6 +271,7 @@ exports.updateProfileForm = async (req, res) => {
 };
 
 exports.applicationForm = async (req, res) => {
+    console.log("Debugging in applicationForm controller...");
     try {
         const application = await ServiceApply.findById(req.params.id);
         res.render('user/applicationForm', { application });
@@ -277,6 +283,7 @@ exports.applicationForm = async (req, res) => {
 };
 
 exports.updateApplicationForm = async (req, res) => {
+    console.log("Debugging in updateApplicationForm controller...");
     try {
         const application = await ServiceApply.findById(req.params.id);
         const oldDocumentIds = application.documents.map(doc => {
@@ -320,3 +327,4 @@ exports.updateApplicationForm = async (req, res) => {
         res.redirect('/user/profile');
     }
 };
+

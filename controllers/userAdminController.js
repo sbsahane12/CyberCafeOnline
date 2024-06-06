@@ -1,8 +1,6 @@
 const User = require('../models/user');
 const cloudinary = require("../utils/cloudinary");
-const fs = require("fs").promises;
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const { newUserSchema, updateUserSchema, emailSchema, passwordResetSchema } = require('../validation/adminValidation');
 const { applicationRejectEmail, applicationCompletedEmail, adminsendPasswordResetEmail } = require('../helpers/mailer');
 const UserForget = require('../models/userforget');
@@ -10,11 +8,11 @@ const randomstring = require('randomstring');
 const ExpressError = require('../utils/ExpressError');
 const ServiceApply = require('../models/applyservice');
 
-const { Console } = require('console');
 
 exports.loginForm = (req, res) => {
     res.render('useradmin/login');
 };
+
 exports.login = (req, res, next) => {
     passport.authenticate('local', async (err, user, info) => {
         try {
@@ -32,8 +30,6 @@ exports.login = (req, res, next) => {
 
                 throw new ExpressError('Please verify your email before logging in. A verification email has been sent.', 400);
             }
-
-          
 
             req.login(user, (err) => {
                 if (err) {
@@ -60,11 +56,10 @@ exports.logout = (req, res, next) => {
     });
 };
 
-
 exports.getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find({});
-        if (!users) {    
+        if (!users) {
             throw new ExpressError("No users found", 404);
         }
         res.render("useradmin/users", { users });
@@ -116,7 +111,6 @@ exports.updateUser = async (req, res, next) => {
         if (req.file) {
             const result = await cloudinary.uploader.upload(req.file.path);
             updateData.avatar = result.secure_url;
-            await fs.unlink(req.file.path);
         }
 
         // Update the user
@@ -133,7 +127,6 @@ exports.updateUser = async (req, res, next) => {
         next(err);
     }
 };
-
 
 exports.deleteUser = async (req, res, next) => {
     try {
@@ -164,20 +157,14 @@ exports.addUser = async (req, res, next) => {
         const { username, email, mobile, role, is_verified, password } = req.body;
         let avatar;
 
-        console.log("Request Body:", req.body); // Log the request body to inspect the received data
-
         const { error } = newUserSchema.validate(req.body);
         if (error) {
-            console.error("Validation Error:", error.message); // Log validation errors
             throw new ExpressError(error.details[0].message, 400);
         }
-
-        console.log("Avatar File:", req.file); // Log the uploaded avatar file
 
         if (req.file) {
             const result = await cloudinary.uploader.upload(req.file.path);
             avatar = result.secure_url;
-            await fs.unlink(req.file.path);
         }
 
         if (mobile.length !== 10) {
@@ -211,16 +198,12 @@ exports.addUser = async (req, res, next) => {
             is_verified: is_verified === "yes"
         });
 
-        console.log("New User Object:", user); // Log the user object before registration
-
         await User.register(user, password);
-
-        console.log("User Registered Successfully");
 
         req.flash('success', 'User added successfully');
         res.redirect("/admin/users");
     } catch (err) {
-        console.error("Error Adding User:", err.message); // Log any errors that occur
+        console.error("Error Adding User:", err.message);
         throw new ExpressError("Failed to add user", 500);
     }
 };
@@ -296,7 +279,6 @@ exports.forgetPasswordForm = async (req, res) => {
 
 exports.forgetPassword = async (req, res) => {
     try {
-        
         const { error } = emailSchema.validate(req.body);
         if (error) {
             throw new ExpressError(error.details[0].message, 400);
@@ -305,7 +287,7 @@ exports.forgetPassword = async (req, res) => {
         const { email } = req.body;
         const user = await User.findOne({ email });
 
-        if(user.role !== 'admin') {
+        if (user.role !== 'admin') {
             throw new ExpressError('Unauthorized access', 403);
         }
 
@@ -325,15 +307,11 @@ exports.forgetPassword = async (req, res) => {
     }
 };
 
-
-
 exports.resetPasswordForm = async (req, res, next) => {
     try {
-       
         const { token } = req.query;
         const userForget = await UserForget.findOne({ token });
 
-        console.log(userForget)
         if (!userForget) {
             throw new ExpressError('Invalid token', 400);
         }
@@ -346,30 +324,25 @@ exports.resetPasswordForm = async (req, res, next) => {
 
 exports.resetPassword = async (req, res, next) => {
     try {
-       
         const { token } = req.body;
         const { error } = passwordResetSchema.validate(req.body);
         if (error) {
             throw new ExpressError(error.details[0].message, 400);
         }
 
-       console.log(token)
-
-        const { password } = req.body;
         const userForget = await UserForget.findOne({ token });
-
 
         if (!userForget) {
             throw new ExpressError('Invalid token', 400);
         }
 
         const user = await User.findById(userForget.user_id);
-        
-        if(!user) {
+
+        if (!user) {
             throw new ExpressError('User not found', 400);
         }
 
-        if(user.role !== 'admin') {
+        if (user.role !== 'admin') {
             throw new ExpressError('Unauthorized access', 403);
         }
 
@@ -381,8 +354,6 @@ exports.resetPassword = async (req, res, next) => {
             res.redirect('/user/login');
         });
     } catch (err) {
-      throw new ExpressError(err.message, err.statusCode || 500);
+        throw new ExpressError(err.message, err.statusCode || 500);
     }
 };
-
-
