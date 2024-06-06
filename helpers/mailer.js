@@ -12,12 +12,9 @@ const transporter = nodemailer.createTransport({
 });
 
 const getBaseUrl = () => {
-    if (process.env.NODE_ENV === 'production') {
-        return process.env.VERCEL_URL;
-    } else {
-        const port = process.env.PORT || 8000; // Use port 8000 if not specified
-        return `http://localhost:${port}`;
-    }
+
+        return "https://cyber-cafe-online.vercel.app";
+    
 };
 
 const sendVerificationEmail = (email, token) => {
