@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendVerificationEmail = (email, token) => {
-    const url = `https://cybercafe-mu.vercel.app/user/verify-email?token=${token}`;
+    const url = `http://localhost:3000/user/verify-email?token=${token}`;
     const mailOptions = {
         from: process.env.SMTP_MAIL,
         to: email,
@@ -30,7 +30,7 @@ const sendVerificationEmail = (email, token) => {
 };
 
 const sendPasswordResetEmail = (email, token) => {
-    const url = `https://cybercafe-mu.vercel.app/user/resetPassword?token=${token}`;
+    const url = `http://localhost:3000/user/resetPassword?token=${token}`;
     const mailOptions = {
         from: process.env.SMTP_MAIL,
         to: email,
