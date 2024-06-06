@@ -1,19 +1,20 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
+    host: "smtp.gmail.com",
+    port: 587,
     secure: false,
-    requireTLS: true,
+    requireTLS: false,
     auth: {
-        user: process.env.SMTP_MAIL,
-        pass: process.env.SMTP_PASSWORD
+        user: "sahanes568@gmail.com",
+        pass:"kxxmbuauzqjqftam"
     }
 });
 
+
 const getBaseUrl = () => {
 
-        return "https://cyber-cafe-online.vercel.app";
+        return "https://localhost:3000";
     
 };
 
