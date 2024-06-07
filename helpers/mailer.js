@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 
 const getBaseUrl = () => {
     if (process.env.NODE_ENV === 'production') {
-        return process.env.VERCEL_URL;
+        return process.env.RENDER_EXTERNAL_URL ;
     } else {
         const port = process.env.PORT || 8000; // Use port 8000 if not specified
         return `http://localhost:${port}`;
@@ -70,7 +70,7 @@ const applicationRejectEmail = (email) => {
         from: process.env.SMTP_MAIL,
         to: email,
         subject: 'Application Rejection',
-        html: `<p>Your application has been rejected . please contact us <a href="mailto:sbsahane23@gmail.com">click here</a>.</p>`
+        html: `<p>Your application has been rejected. Please contact us <a href="mailto:sbsahane23@gmail.com">here</a>.</p>`
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -84,7 +84,7 @@ const applicationCompletedEmail = (email) => {
         from: process.env.SMTP_MAIL,
         to: email,
         subject: 'Application Completed',
-        html: `<p>Your application has been completed .If You have any query please contact us <a href="mailto:sbsahane23@gmail.com">click here</a>.</p>`
+        html: `<p>Your application has been completed. If you have any query, please contact us <a href="mailto:sbsahane23@gmail.com">here</a>.</p>`
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -98,7 +98,7 @@ const problemSeenEmail = (email) => {
         from: process.env.SMTP_MAIL,
         to: email,
         subject: 'Problem Seen',
-        html: `<p>Your problem has been seen .If You have any query please contact us <a href="mailto:sbsahane23@gmail.com">click here</a>.</p>`
+        html: `<p>Your problem has been seen. If you have any query, please contact us <a href="mailto:sbsahane23@gmail.com">here</a>.</p>`
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -112,7 +112,7 @@ const problemSolvedEmail = (email) => {
         from: process.env.SMTP_MAIL,
         to: email,
         subject: 'Problem Solved',
-        html: `<p>Your problem has been solved .If You have any query please contact us <a href="mailto:sbsahane23@gmail.com">click here</a>.</p>`
+        html: `<p>Your problem has been solved. If you have any query, please contact us <a href="mailto:sbsahane23@gmail.com">here</a>.</p>`
     };
 
     transporter.sendMail(mailOptions, (err, info) => {

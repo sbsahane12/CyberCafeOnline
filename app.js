@@ -91,7 +91,7 @@ app.use((err, req, res, next) => {
 console.log('SMTP_MAIL:', process.env.SMTP_MAIL);
 console.log('SMTP_HOST:', process.env.SMTP_HOST);
 console.log('SMTP_PORT:', process.env.SMTP_PORT);
-// Add similar console.log statements for other SMTP configuration variables
+
 
 
 app.use("*", (req, res) => {
