@@ -1,21 +1,23 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
     secure: false,
-    requireTLS: false,
+    requireTLS: true,
     auth: {
-        user: "sahanes568@gmail.com",
-        pass:"kxxmbuauzqjqftam"
+        user: process.env.SMTP_MAIL,
+        pass: process.env.SMTP_PASSWORD
     }
 });
 
-
 const getBaseUrl = () => {
-
-        return "https://localhost:3000";
-    
+    if (process.env.NODE_ENV === 'production') {
+        return process.env.VERCEL_URL;
+    } else {
+        const port = process.env.PORT || 8000; // Use port 8000 if not specified
+        return `http://localhost:${port}`;
+    }
 };
 
 const sendVerificationEmail = (email, token) => {
