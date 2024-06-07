@@ -97,7 +97,7 @@ console.log('SMTP_PORT:', process.env.SMTP_PORT);
 app.use("*", (req, res) => {
    res.render("error", { err: { message: "Page Not Found", status: 404 }});
 });
-const PORT = 8000 || process.env.PORT;
+const PORT = 8000;
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });
