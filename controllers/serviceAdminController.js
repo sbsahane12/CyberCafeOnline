@@ -57,7 +57,7 @@ exports.getAllServices = async (req, res, next) => {
 };
 
 exports.getNewServiceForm = (req, res) => {
-  res.render("cyberCafe/newService");
+  res.render("cybercafe/newService");
 };
 
 exports.createService = async (req, res, next) => {
